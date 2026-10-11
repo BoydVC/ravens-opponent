@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ravens Opponent Dossier</title>
+<meta name="theme-color" content="#241773">
+<meta name="description" content="Offline Baltimore Ravens scouting board — EXAMPLE matchup briefing, scheme board, matchups, tendencies, game script.">
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<div class="field-lines" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="brand">
+    <span class="crest" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="52" height="52">
+        <defs>
+          <linearGradient id="rPurp" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#3a1fa8"/><stop offset="1" stop-color="#241773"/>
+          </linearGradient>
+          <linearGradient id="rGold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f5d76e"/><stop offset="1" stop-color="#9e7c0c"/>
+          </linearGradient>
+        </defs>
+        <circle cx="32" cy="32" r="30" fill="url(#rPurp)" stroke="url(#rGold)" stroke-width="2.5"/>
+        <circle cx="32" cy="32" r="22" fill="none" stroke="#fff" stroke-width="1.2" opacity=".3"/>
+        <path d="M18 40 L32 16 L46 40 Z" fill="none" stroke="url(#rGold)" stroke-width="2"/>
+        <text x="32" y="44" text-anchor="middle" font-size="11" font-weight="800" fill="#fff" font-family="system-ui,sans-serif">BAL</text>
+      </svg>
+    </span>
+    <div>
+      <h1>Ravens Opponent Dossier</h1>
+      <p class="sub">M&amp;T Bank Stadium · Scouting desk · EXAMPLE data only</p>
+    </div>
+  </div>
+  <div class="topmeta">
+    <span class="pill purple">AFC North</span>
+    <span class="pill soft" id="demoPill">DEMO / EXAMPLE DATA</span>
+    <button id="btnWall" class="ghost" title="Wall display mode" type="button">Wall</button>
+    <button id="btnHelp" class="ghost" title="About" type="button">?</button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Dossier screens">
+  <button role="tab" class="tab on" data-tab="briefing" aria-selected="true" type="button">Briefing</button>
+  <button role="tab" class="tab" data-tab="scheme" aria-selected="false" type="button">Scheme Board</button>
+  <button role="tab" class="tab" data-tab="matchups" aria-selected="false" type="button">Matchups</button>
+  <button role="tab" class="tab" data-tab="tendencies" aria-selected="false" type="button">Tendencies</button>
+  <button role="tab" class="tab" data-tab="script" aria-selected="false" type="button">Game Script</button>
+</nav>
+
+<main class="stage">
+  <!-- BRIEFING -->
+  <section id="panel-briefing" class="panel on" role="tabpanel">
+    <div class="hero">
+      <div class="hero-banner">M&amp;T BANK STADIUM · OPPONENT DOSSIER</div>
+      <div class="kick-meta">
+        <span>EXAMPLE week label · not a live slate</span>
+        <span>Baltimore · Purple &amp; Black</span>
+      </div>
+      <div class="matchup-hero">
+        <div class="team home-t">
+          <div class="crest-mini">BAL</div>
+          <div class="name">Ravens</div>
+          <div class="rec">EXAMPLE XI</div>
+        </div>
+        <div class="at-block">
+          <div class="vs">VS</div>
+          <div class="kick-time" id="weekLabel">DEMO · Week Demo</div>
+        </div>
+        <div class="team away-t">
+          <div class="crest-mini opp">OPP</div>
+          <div class="name">Example Opp</div>
+          <div class="rec">placeholder roster</div>
+        </div>
+      </div>
+      <p class="demo-note">Offline scouting dossier. All schemes, matchups, tendencies, and drive scripts are labeled EXAMPLE / DEMO DATA — not live stats, injuries, or depth charts.</p>
+    </div>
+
+    <div class="section-label">Key Themes <span class="tag-ex">EXAMPLE</span></div>
+    <div class="grid-3" id="themeCards">
+      <article class="card theme-card clickable" data-jump="scheme">
+        <div class="theme-icon" aria-hidden="true">◈</div>
+        <h3>Coverage Shell</h3>
+        <p>EXAMPLE Cover 2 / Cover 3 mix. Expect early safety rotation on empty sets.</p>
+        <span class="card-go">Open Scheme Board →</span>
+      </article>
+      <article class="card theme-card clickable" data-jump="matchups">
+        <div class="theme-icon" aria-hidden="true">⚔</div>
+        <h3>Edge Pressure</h3>
+        <p>EXAMPLE edge vs RT conflict. Script chip help and hot routes on early downs.</p>
+        <span class="card-go">Open Matchups →</span>
+      </article>
+      <article class="card theme-card clickable" data-jump="tendencies">
+        <div class="theme-icon" aria-hidden="true">▤</div>
+        <h3>3rd &amp; Medium</h3>
+        <p>EXAMPLE tendency: man-match on 3rd-and-6–8. Crossers and option routes matter.</p>
+        <span class="card-go">Open Tendencies →</span>
+      </article>
+    </div>
+
+    <div class="grid-2 briefing-lower">
+      <article class="card">
+        <h3>Game Environment <span class="tag-ex">DEMO</span></h3>
+        <ul class="ticks">
+          <li>Venue flavor: M&amp;T Bank Stadium (public franchise fact)</li>
+          <li>Weather slot: EXAMPLE / placeholder — not a forecast</li>
+          <li>Surface &amp; pace: EXAMPLE scripted tempo notes</li>
+          <li>Broadcast vibe: purple/black/gold desk chrome</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Scout Checklist <span class="tag-ex">EXAMPLE</span></h3>
+        <ul class="check-list" id="scoutChecks">
+          <li><label><input type="checkbox" data-k="c1"> Mark Cover 2 / 3 tells on first 8 snaps</label></li>
+          <li><label><input type="checkbox" data-k="c2"> Track edge rush win rate (EXAMPLE meter)</label></li>
+          <li><label><input type="checkbox" data-k="c3"> Note red-zone personnel packages</label></li>
+          <li><label><input type="checkbox" data-k="c4"> Log 3rd-down coverage rotation</label></li>
+          <li><label><input type="checkbox" data-k="c5"> Review game-script coaching notes</label></li>
+        </ul>
+        <button type="button" class="btn soft" id="btnResetChecks">Reset checklist</button>
+      </article>
+    </div>
+
+    <div class="quick-row">
+      <button type="button" class="btn gold" data-jump="scheme">Scheme Board</button>
+      <button type="button" class="btn soft" data-jump="matchups">Matchups</button>
+      <button type="button" class="btn soft" data-jump="tendencies">Tendencies</button>
+      <button type="button" class="btn soft" data-jump="script">Game Script</button>
+    </div>
+  </section>
+
+  <!-- SCHEME BOARD -->
+  <section id="panel-scheme" class="panel" role="tabpanel" hidden>
+    <div class="panel-head">
+      <h2>Scheme Board</h2>
+      <p class="hint">Animated SVG field · EXAMPLE Cover 1 / 2 / 3 · play/pause · not live film</p>
+    </div>
+    <div class="scheme-layout">
+      <div class="field-card card">
+        <div class="field-toolbar">
+          <div class="seg" role="group" aria-label="Coverage picker">
+            <button type="button" class="seg-btn on" data-cov="cover2">Cover 2</button>
+            <button type="button" class="seg-btn" data-cov="cover3">Cover 3</button>
+            <button type="button" class="seg-btn" data-cov="cover1">Cover 1</button>
+          </div>
+          <div class="play-controls">
+            <button type="button" class="btn gold" id="btnPlayPause" aria-pressed="true">Pause</button>
+            <button type="button" class="btn soft" id="btnResetScheme">Reset</button>
+          </div>
+        </div>
+        <div class="field-wrap" id="fieldWrap">
+          <svg id="schemeField" viewBox="0 0 800 420" role="img" aria-label="EXAMPLE football field with coverage shells">
+            <defs>
+              <linearGradient id="turfGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1f6b35"/><stop offset="1" stop-color="#145028"/>
+              </linearGradient>
+              <filter id="glowDot"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect x="20" y="20" width="760" height="380" rx="8" fill="url(#turfGrad)" stroke="#f5d76e" stroke-width="2"/>
+            <g id="yardLines" stroke="rgba(255,255,255,.35)" stroke-width="1"></g>
+            <text x="400" y="40" text-anchor="middle" fill="#f5d76e" font-size="12" font-weight="700" letter-spacing="3">EXAMPLE COVERAGE · DEMO DATA</text>
+            <g id="coverageZones" opacity=".55"></g>
+            <g id="players"></g>
+            <g id="routes" fill="none" stroke-width="2.5" stroke-linecap="round"></g>
+            <text id="covLabel" x="400" y="400" text-anchor="middle" fill="#f5d76e" font-size="14" font-weight="800">COVER 2 — EXAMPLE</text>
+          </svg>
+        </div>
+        <p class="field-caption" id="covCaption">Two-deep safeties, five underneath. Corners soft squat. EXAMPLE only.</p>
+      </div>
+      <aside class="card scheme-notes">
+        <h3>Shell Notes <span class="tag-ex">EXAMPLE</span></h3>
+        <div id="schemeNoteBody">
+          <p>Cover 2 (EXAMPLE): Safeties split deep halves. Linebackers expand to flats / hooks. Corners play soft leverage — beaters are seams and deep outs.</p>
+        </div>
+        <ul class="ticks" id="schemeBullets">
+          <li>Seam windows vs 2-high</li>
+          <li>Flat stretch with RB / TE</li>
+          <li>Play-action freeze on LB drop</li>
+        </ul>
+        <div class="meter-block">
+          <div class="meter-label"><span>Shell confidence</span><span id="shellConf">72%</span></div>
+          <div class="meter"><div class="meter-fill" id="shellMeter" style="width:72%"></div></div>
+          <p class="hint tiny">EXAMPLE confidence meter — fictional, not a model output.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- MATCHUPS -->
+  <section id="panel-matchups" class="panel" role="tabpanel" hidden>
+    <div class="panel-head">
+      <h2>Positional Matchups</h2>
+      <p class="hint">EXAMPLE strength meters · not live depth charts or injury reports</p>
+    </div>
+    <div class="filter-bar">
+      <button type="button" class="seg-btn on" data-filter="all">All</button>
+      <button type="button" class="seg-btn" data-filter="pass">Pass game</button>
+      <button type="button" class="seg-btn" data-filter="run">Run / trench</button>
+      <button type="button" class="seg-btn" data-filter="pressure">Pressure</button>
+    </div>
+    <div class="matchup-grid" id="matchupGrid"></div>
+  </section>
+
+  <!-- TENDENCIES -->
+  <section id="panel-tendencies" class="panel" role="tabpanel" hidden>
+    <div class="panel-head">
+      <h2>Tendencies</h2>
+      <p class="hint">EXAMPLE down-and-distance bars and red-zone looks · DEMO DATA</p>
+    </div>
+    <div class="grid-2 tend-layout">
+      <article class="card">
+        <h3>Down &amp; Distance <span class="tag-ex">EXAMPLE</span></h3>
+        <div class="chart" id="dndChart" aria-label="EXAMPLE down and distance chart"></div>
+      </article>
+      <article class="card">
+        <h3>Coverage Mix by Down <span class="tag-ex">EXAMPLE</span></h3>
+        <div class="chart" id="covMixChart" aria-label="EXAMPLE coverage mix chart"></div>
+      </article>
+    </div>
+    <div class="grid-3 rz-row" id="rzCards">
+      <article class="card rz-card">
+        <h3>Red Zone · Inside 20</h3>
+        <p class="rz-stat"><span class="big">Cover 3</span> EXAMPLE primary</p>
+        <p>Soft middle of field · EXAMPLE fade / dig mix</p>
+        <div class="meter"><div class="meter-fill gold" style="width:64%"></div></div>
+      </article>
+      <article class="card rz-card">
+        <h3>Goal-to-Go</h3>
+        <p class="rz-stat"><span class="big">Man Match</span> EXAMPLE</p>
+        <p>Press corners · EXAMPLE slant / pick concepts</p>
+        <div class="meter"><div class="meter-fill" style="width:58%"></div></div>
+      </article>
+      <article class="card rz-card">
+        <h3>2-Minute</h3>
+        <p class="rz-stat"><span class="big">2-High</span> EXAMPLE shell</p>
+        <p>Prevent deep · EXAMPLE underneath checkers</p>
+        <div class="meter"><div class="meter-fill warn" style="width:71%"></div></div>
+      </article>
+    </div>
+    <article class="card tend-table-card">
+      <h3>Personnel Package Frequency <span class="tag-ex">DEMO</span></h3>
+      <div class="table-wrap">
+        <table class="data-table" id="persTable">
+          <thead>
+            <tr><th>Package</th><th>1st Down</th><th>2nd Down</th><th>3rd Down</th><th>Note</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+
+  <!-- GAME SCRIPT -->
+  <section id="panel-script" class="panel" role="tabpanel" hidden>
+    <div class="panel-head">
+      <h2>Game Script</h2>
+      <p class="hint">Interactive EXAMPLE drive timeline with coaching notes · DEMO DATA</p>
+    </div>
+    <div class="script-layout">
+      <div class="card script-timeline">
+        <div class="script-toolbar">
+          <button type="button" class="btn soft" id="btnPrevDrive">← Prev</button>
+          <span class="drive-label" id="driveLabel">Drive 1 · EXAMPLE openers</span>
+          <button type="button" class="btn soft" id="btnNextDrive">Next →</button>
+        </div>
+        <ol class="timeline" id="driveTimeline"></ol>
+      </div>
+      <aside class="card script-detail" id="scriptDetail">
+        <h3 id="scriptTitle">Select a snap</h3>
+        <p class="tag-line"><span class="tag-ex">EXAMPLE</span> <span id="scriptMeta">—</span></p>
+        <p id="scriptBody">Click any play on the timeline to expand coaching notes for this DEMO drive script.</p>
+        <ul class="ticks" id="scriptTicks"></ul>
+        <div class="fp-bar-wrap">
+          <div class="fp-label">Field position <span id="fpText">—</span></div>
+          <div class="fp-track"><div class="fp-ball" id="fpBall" style="left:25%"></div></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Ravens Opponent Dossier · TokenMax burn · offline</span>
+  <span>All scouting content is EXAMPLE / DEMO DATA · no live stats</span>
+</footer>
+
+<dialog id="helpDlg">
+  <div class="help-box">
+    <h2>About this dossier</h2>
+    <p>Offline Baltimore Ravens fan scouting board. Purple / black / gold chrome matches prior TokenMax Ravens builds. Geometric crest only — no trademarked logos.</p>
+    <ul class="ticks">
+      <li><strong>Public flavor OK:</strong> M&amp;T Bank Stadium, AFC North, team colors</li>
+      <li><strong>EXAMPLE only:</strong> coverages, matchups, tendencies, drive scripts</li>
+      <li><strong>Never treated as live:</strong> injuries, depth charts, real stats</li>
+    </ul>
+    <button type="button" class="btn gold" id="btnCloseHelp">Got it</button>
+  </div>
+</dialog>
+
+<script>/*__APP__*/</script>
+</body>
+</html>
